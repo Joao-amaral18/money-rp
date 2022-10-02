@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react'
+import { api } from '../services/api'
 
 export default function TransactionTable() {
 
     useEffect(() => {
-    })
+        api.get('transactions')
+            .then(response => console.log(response.data))
+    }, [])
     return (
         <div className='mt-16'>
             <table className='w-full border-separate border-spacing-y-2 rounded'>
