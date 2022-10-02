@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { api } from '../services/api'
 
 export default function TransactionTable() {
@@ -20,16 +20,16 @@ export default function TransactionTable() {
                 </thead>
                 <tbody>
                     <tr className='bg-white dark:bg-gray-700 text-gray-300 rounded'>
-                        <td className='p-4  dark:text-white text-gray-700'>Desenvolvimento de website</td>
-                        <td className='text-red-500'>r$12.000</td>
-                        <td>desenvolvimento</td>
-                        <td>{Date().toString()}</td>
+                        <td className='p-4 rounded-t rounded-bl dark:text-white text-gray-700'>Desenvolvimento de website</td>
+                        <td className='text-red-500 p-2'>r$12.000</td>
+                        <td className='p-2'>desenvolvimento</td>
+                        <td className='rounded-tr rounded-br p-2'>{Date().toString()}</td>
                     </tr>
                     <tr className='bg-white dark:bg-gray-700 text-gray-300 rounded'>
-                        <td className='p-4 dark:text-white text-gray-700'>Desenvolvimento de website</td>
-                        <td className='text-green-300'>r$12.000</td>
-                        <td>desenvolvimento</td>
-                        <td>{Date().toString()}</td>
+                        <td className='p-4 rounded-t rounded-bl dark:text-white text-gray-700'>Desenvolvimento de website</td>
+                        <td className='text-green-300 p-2'>r$12.000</td>
+                        <td className='p-2'>desenvolvimento</td>
+                        <td className='rounded-tr rounded-br p-2'>{Date().toString()}</td>
                     </tr>
                 </tbody>
             </table>

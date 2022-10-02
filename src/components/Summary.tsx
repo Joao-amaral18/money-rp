@@ -6,15 +6,15 @@ export default function Summary() {
             <div className='flex justify-between -mt-28'>
                 <div className='bg-white dark:bg-gray-700 dark:text-gray-100 py-6 px-8 rounded'>
                     <header className='flex gap-28 items-center justify-between'>
-                        <p>entradas</p>
+                        <p>Entradas</p>
                         <ArrowCircleDown className='text-green-500' size={32} />
                     </header>
                     <strong className='mt-4 text-4xl block font-semibold leading-10'>R$1000,00</strong>
                 </div>
                 <div className='bg-white dark:bg-gray-700 dark:text-gray-100 py-6 px-8 rounded'>
                     <header className='flex gap-28 items-center justify-between'>
-                        <p>Saidas</p>
-                        <ArrowCircleDown className='text-red-500' size={32} />
+                        <p>Saídas</p>
+                        <ArrowCircleUp className='text-red-500' size={32} />
                     </header>
                     <strong className='mt-4 text-4xl block font-semibold leading-10'>R$1000,00</strong>
                 </div>

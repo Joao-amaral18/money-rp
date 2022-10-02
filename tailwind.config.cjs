@@ -30,6 +30,9 @@ module.exports = {
           700: '#121214',
           900: '#09090A'
         }
+      },
+      grid: {
+        gridTransactionType: '1fr 1fr'
       }
     },
   },

@@ -2,22 +2,13 @@ import Modal from 'react-modal'
 import { Sun, Moon } from 'phosphor-react'
 import { useState } from 'react'
 
+interface HeaderProps {
+  onOpenNewModal: () => void;
+  toggleDarkMode: () => void;
+  isDarkModeOn: boolean
+}
 
-
-function Header(props: any) {
-
-  const [isNewModalOpen, setIsNewModalOpen] = useState(false)
-
-  function handleOpenModal() {
-    setIsNewModalOpen(true)
-  }
-  function handleCloseModal() {
-    setIsNewModalOpen(false)
-  }
-
-
-  const handleDark = props.handleDark
-
+function Header({ isDarkModeOn, onOpenNewModal, toggleDarkMode }: HeaderProps) {
   return (
     <header className='bg-purple-500 '>
       <div className="max-w-[1120px] m-auto px-4 pt-8 pb-40 flex items-center justify-between">
@@ -25,16 +16,10 @@ function Header(props: any) {
         <div className='flex gap-2'>
 
 
-          <button className='text-white bg-purple-300 px-8 rounded h-12 block hover:brightness-75 transition' onClick={handleOpenModal}>Nova transacao</button>
-          <Modal
-            isOpen={isNewModalOpen}
-            onRequestClose={handleCloseModal}
-          >
-            <h1>Cadastrar Transacao</h1>
-          </Modal>
+          <button className='text-white bg-purple-300 px-8 rounded h-12 block hover:brightness-75 transition' onClick={onOpenNewModal}>Nova transacao</button>
 
-          <button className='border-4 rounded-2xl px-2 dark:border-gray-900 transition-all' onClick={handleDark} >
-            {props.darkToggle ? <Moon weight='bold' size={24} /> : <Sun weight='bold' size={24} color={'#fff'} />}
+          <button className='border-4 rounded-2xl px-2 dark:border-gray-900 transition-all' onClick={toggleDarkMode} >
+            {isDarkModeOn ? <Moon weight='bold' size={24} /> : <Sun weight='bold' size={24} color={'#fff'} />}
           </button>
         </div>
       </div>
