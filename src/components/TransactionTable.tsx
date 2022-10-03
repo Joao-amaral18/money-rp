@@ -1,12 +1,23 @@
-import { useEffect } from 'react'
+import classNames from 'classnames'
+import { useEffect, useState } from 'react'
 import { api } from '../services/api'
 
 export default function TransactionTable() {
-
+    interface Transaction {
+        id: string,
+        title: string,
+        amount: number,
+        category: string,
+        type: string
+        createdAt: string
+    }
+    const [transactions, setTransactions] = useState<Transaction[]>([])
     useEffect(() => {
         api.get('transactions')
-            .then(response => console.log(response.data))
+            .then(response => setTransactions(response.data.transactions))
+        console.log(transactions)
     }, [])
+
     return (
         <div className='mt-16'>
             <table className='w-full border-separate border-spacing-y-2 rounded'>
@@ -19,18 +30,24 @@ export default function TransactionTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr className='bg-white dark:bg-gray-700 text-gray-300 rounded'>
-                        <td className='p-4 rounded-t rounded-bl dark:text-white text-gray-700'>Desenvolvimento de website</td>
-                        <td className='text-red-500 p-2'>r$12.000</td>
-                        <td className='p-2'>desenvolvimento</td>
-                        <td className='rounded-tr rounded-br p-2'>{Date().toString()}</td>
-                    </tr>
-                    <tr className='bg-white dark:bg-gray-700 text-gray-300 rounded'>
-                        <td className='p-4 rounded-t rounded-bl dark:text-white text-gray-700'>Desenvolvimento de website</td>
-                        <td className='text-green-300 p-2'>r$12.000</td>
-                        <td className='p-2'>desenvolvimento</td>
-                        <td className='rounded-tr rounded-br p-2'>{Date().toString()}</td>
-                    </tr>
+                    {
+                        transactions.map(transaction => (
+                            <tr className='bg-white dark:bg-gray-700 text-gray-300 rounded'>
+                                <td className='p-4 rounded-t rounded-bl dark:text-white text-gray-700'>{transaction.title}</td>
+                                <td className={classNames(
+                                    { 'text-green-300 p-2': transaction.type === 'deposit' },
+                                    { 'text-red-500 p-2': transaction.type === 'withdraw' },
+
+                                )}>{Intl.NumberFormat('pt-BR', {
+                                    style: 'currency',
+                                    currency: 'BRL'
+                                }).format(transaction.amount)}</td>
+                                <td className='p-2'>{transaction.category}</td>
+                                <td className='rounded-tr rounded-br p-2'>{new Intl.DateTimeFormat('pt-BR').format(new Date(transaction.createdAt))}</td>
+                            </tr>)
+                        )}
+
+
                 </tbody>
             </table>
         </div >

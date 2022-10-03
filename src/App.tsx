@@ -24,7 +24,7 @@ function App() {
 
   return (
 
-    <html className={isDarkModeOn ? 'dark bg-gray-900 h-screen' : 'bg-zinc-200 h-screen'}>
+    <div className={isDarkModeOn ? 'dark bg-gray-900 h-screen' : 'bg-zinc-200 h-screen'}>
       <Header
         isDarkModeOn={isDarkModeOn}
         toggleDarkMode={toggleDarkMode}
@@ -38,7 +38,7 @@ function App() {
       />
 
       <Dashboard />
-    </html >
+    </div >
   )
 }
 
