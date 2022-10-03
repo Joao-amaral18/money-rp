@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Modal from 'react-modal';
 import Summary from './components/Summary';
 import NewTransactionModal from './components/NewTransactionModal';
+import { TransactionsContext } from './TransactionContet';
 
 Modal.setAppElement('#root')
 
@@ -23,22 +24,23 @@ function App() {
   }
 
   return (
+    <TransactionsContext.Provider value={[]}>
+      <div className={isDarkModeOn ? 'dark bg-gray-900 h-screen' : 'bg-zinc-200 h-screen'}>
+        <Header
+          isDarkModeOn={isDarkModeOn}
+          toggleDarkMode={toggleDarkMode}
+          onOpenNewModal={handleOpenModal}
+        />
+        <NewTransactionModal
+          handleCloseModal={handleCloseModal}
+          isNewModalOpen={isNewModalOpen}
+          isDarkModeOn={isDarkModeOn}
 
-    <div className={isDarkModeOn ? 'dark bg-gray-900 h-screen' : 'bg-zinc-200 h-screen'}>
-      <Header
-        isDarkModeOn={isDarkModeOn}
-        toggleDarkMode={toggleDarkMode}
-        onOpenNewModal={handleOpenModal}
-      />
-      <NewTransactionModal
-        handleCloseModal={handleCloseModal}
-        isNewModalOpen={isNewModalOpen}
-        isDarkModeOn={isDarkModeOn}
+        />
 
-      />
-
-      <Dashboard />
-    </div >
+        <Dashboard />
+      </div >
+    </TransactionsContext.Provider>
   )
 }
 
