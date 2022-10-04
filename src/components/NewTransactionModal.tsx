@@ -23,17 +23,21 @@ export default function NewTransactionModal({ isNewModalOpen, handleCloseModal, 
     const [amount, setAmount] = useState(0)
     const [type, setType] = useState('deposit');
 
-    function handleCreateNewTransaction(event: FormEvent) {
+    async function handleCreateNewTransaction(event: FormEvent) {
         event.preventDefault()
         const now = new Date()
 
-        createTransaction({
+        await createTransaction({
             title,
             amount,
             category,
             type
         })
-
+        setTitle('');
+        setAmount(0);
+        setCategory('');
+        setType('Deposit');
+        handleCloseModal()
     }
     return (
         <Modal
@@ -49,7 +53,7 @@ export default function NewTransactionModal({ isNewModalOpen, handleCloseModal, 
             </button>
             <form>
                 <h2 className='font-semibold text-gray-500 text-2xl mb-8 dark:text-gray-100 '>Cadastrar transação</h2>
-                <input className='w-full p-6 h-16 rounded border border-gray-200 bg-gray-200 dark:bg-gray-600 placeholder:dark:text-gray-300 placeholder:text-gray-500' type="text" placeholder='Titulo' value={title} onChange={event => setTitle(event.target.value)} />
+                <input className='w-full p-6 h-16 rounded border border-gray-200 bg-gray-200 dark:bg-gray-600 placeholder:dark:text-gray-300 dark:text-gray-300 placeholder:text-gray-500' type="text" placeholder='Titulo' value={title} onChange={event => setTitle(event.target.value)} />
                 <input className='w-full p-6 h-16 rounded border border-gray-200 bg-gray-200 dark:bg-gray-600 dark:text-gray-300 placeholder:dark:text-gray-300 placeholder:text-gray-500  mt-4' type="number" placeholder='Valor' value={amount} onChange={event => setAmount(Number(event.target.value))} />
                 <div className='mt-4 grid grid-cols-2 gap-10'>
                     <button type='button' onClick={() => { setType('deposit') }} className={classNames('h-16 border rounded border-gray-200 hover:border-gray-900 transition-all dark:hover:border-white flex items-center justify-center dark:text-gray-100 text-gray-500',

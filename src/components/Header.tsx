@@ -1,6 +1,4 @@
-import Modal from 'react-modal'
 import { Sun, Moon } from 'phosphor-react'
-import { useState } from 'react'
 
 interface HeaderProps {
   onOpenNewModal: () => void;
