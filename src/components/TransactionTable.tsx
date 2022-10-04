@@ -1,22 +1,9 @@
 import classNames from 'classnames'
-import { useEffect, useState } from 'react'
-import { api } from '../services/api'
+import { useContext } from 'react'
+import { TransactionsContext } from '../TransactionContet'
 
 export default function TransactionTable() {
-    interface Transaction {
-        id: string,
-        title: string,
-        amount: number,
-        category: string,
-        type: string
-        createdAt: string
-    }
-    const [transactions, setTransactions] = useState<Transaction[]>([])
-    useEffect(() => {
-        api.get('transactions')
-            .then(response => setTransactions(response.data.transactions))
-        console.log(transactions)
-    }, [])
+    const { transactions } = useContext(TransactionsContext)
 
     return (
         <div className='mt-16'>

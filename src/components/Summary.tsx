@@ -1,6 +1,12 @@
 import { ArrowCircleDown, ArrowCircleUp } from 'phosphor-react'
+import { useContext } from 'react'
+import { TransactionsContext } from '../TransactionContet'
 
 export default function Summary() {
+    const { transactions } = useContext(TransactionsContext)
+
+
+
     return (
         <div>
             <div className='flex justify-between -mt-28'>

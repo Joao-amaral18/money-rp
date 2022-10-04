@@ -4,7 +4,7 @@ import Header from './components/Header';
 import Modal from 'react-modal';
 import Summary from './components/Summary';
 import NewTransactionModal from './components/NewTransactionModal';
-import { TransactionsContext } from './TransactionContet';
+import { TransactionsProvider } from './TransactionContet';
 
 Modal.setAppElement('#root')
 
@@ -24,7 +24,7 @@ function App() {
   }
 
   return (
-    <TransactionsContext.Provider value={[]}>
+    <TransactionsProvider>
       <div className={isDarkModeOn ? 'dark bg-gray-900 h-screen' : 'bg-zinc-200 h-screen'}>
         <Header
           isDarkModeOn={isDarkModeOn}
@@ -40,7 +40,7 @@ function App() {
 
         <Dashboard />
       </div >
-    </TransactionsContext.Provider>
+    </TransactionsProvider>
   )
 }
 

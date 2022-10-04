@@ -1,16 +1,22 @@
-import { X, ArrowCircleDown, ArrowCircleUp } from 'phosphor-react';
 import classNames from 'classnames';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useContext } from 'react';
 import Modal from 'react-modal'
 import './modal.css'
 import { api } from '../services/api';
+
+import { X, ArrowCircleDown, ArrowCircleUp } from 'phosphor-react';
+import { TransactionsContext } from '../TransactionContet';
 
 interface ModalProps {
     isNewModalOpen: boolean,
     handleCloseModal: () => void,
     isDarkModeOn: boolean,
 }
+
+
 export default function NewTransactionModal({ isNewModalOpen, handleCloseModal, isDarkModeOn }: ModalProps) {
+
+    const { createTransaction } = useContext(TransactionsContext)
 
     const [title, setTitle] = useState('')
     const [category, setCategory] = useState('')
@@ -21,15 +27,12 @@ export default function NewTransactionModal({ isNewModalOpen, handleCloseModal, 
         event.preventDefault()
         const now = new Date()
 
-        const data =
-        {
+        createTransaction({
             title,
             amount,
             category,
-            type,
-        }
-
-        api.post('/transactions', data)
+            type
+        })
 
     }
     return (
@@ -51,13 +54,13 @@ export default function NewTransactionModal({ isNewModalOpen, handleCloseModal, 
                 <div className='mt-4 grid grid-cols-2 gap-10'>
                     <button type='button' onClick={() => { setType('deposit') }} className={classNames('h-16 border rounded border-gray-200 hover:border-gray-900 transition-all dark:hover:border-white flex items-center justify-center dark:text-gray-100 text-gray-500',
                         {
-                            'bg-green-300/10 dark:text-gray-900': type === 'deposit'
+                            'bg-green-300/10': type === 'deposit'
                         }
                     )} value={type}> <ArrowCircleDown className='text-green-500' size={32} /><span className='block ml-4'>Entrada</span>
                     </button>
                     <button type='button' onClick={() => { setType('withdraw') }} className={classNames('h-16 border rounded border-gray-200 hover:border-gray-900 transition-all dark:hover:border-white flex items-center justify-center dark:text-gray-100 text-gray-500',
                         {
-                            'bg-red-500/20 dark:text-gray-900': type === 'withdraw'
+                            'bg-red-500/20': type === 'withdraw'
                         }
                     )} value={type}> <ArrowCircleUp className='text-red-500' size={32} /><span className='block ml-4'>Saída</span></button>
                 </div>
